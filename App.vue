@@ -22,6 +22,8 @@
 	// 设置整个项目的背景色
 	page {
 		background-color: #fff;
+		font-family: -apple-system, BlinkMacSystemFont, Helvetica Neue, Helvetica, Arial, PingFang SC, Hiragino Sans GB, Microsoft YaHei, sans-serif;
+		--main-color: #6c4ea7
 	}
 
 	/* #endif */

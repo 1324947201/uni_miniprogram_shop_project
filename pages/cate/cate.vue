@@ -1,5 +1,6 @@
 <template>
 	<view>
+		<my-search bgColor="#6c4ea7" @click="gotoSearch()"></my-search>
 		<view class="scoll-view-container">
 			<!-- 左侧滑动区 -->
 			<scroll-view class="left-scoll-view" scroll-y="true" :style="{height: windowHeight + 'px'}">
@@ -17,7 +18,8 @@
 
 					<!-- 三级分类列表 -->
 					<view class="cate-level3-list">
-						<view class="cate-level3-title-item" v-for="item3 in item2.children" :key="item3.cat_id" @click="gotoGoodsList(item3.cat_id)">
+						<view class="cate-level3-title-item" v-for="item3 in item2.children" :key="item3.cat_id"
+							@click="gotoGoodsList(item3.cat_id)">
 							<image :src="item3.cat_icon"></image>
 							<text>{{item3.cat_name}}</text>
 						</view>
@@ -60,15 +62,21 @@
 				this.scrollTop = this.scrollTop === 0 ? 1 : 0
 			},
 			//跳转到商品列表页面
-			gotoGoodsList(id){
+			gotoGoodsList(id) {
 				uni.navigateTo({
-					url:'/subpackage/goods_list/goods_list?cid=' + id
+					url: '/subpackage/goods_list/goods_list?cid=' + id
+				})
+			},
+			//跳转到搜索页面
+			gotoSearch(){
+				uni.navigateTo({
+					url:'/subpackage/search/search'
 				})
 			}
 		},
 		onLoad() {
 			const systemInfo = uni.getSystemInfoSync()
-			this.windowHeight = systemInfo.windowHeight
+			this.windowHeight = systemInfo.windowHeight - 56
 			this.getCateList()
 		}
 	}

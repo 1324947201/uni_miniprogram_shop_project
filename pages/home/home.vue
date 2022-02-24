@@ -1,5 +1,8 @@
 <template>
 	<view>
+		<view class="search-box">
+			<my-search bgColor="#6c4ea7" @click="gotoSearch()"></my-search>
+		</view>
 		<!-- 轮播图区域 -->
 		<swiper :indicator-dots="true" :autoplay="true" :interval="3000" :duration="1000" :circular="true">
 			<swiper-item v-for="item in swiperList" :key="item.goods_id">
@@ -26,7 +29,7 @@
 							:style="{width:item.product_list[0].image_width + 'rpx'}" mode="widthFix"></image>
 					</navigator>
 					<!-- 循环渲染右侧小图片 -->
-					<view class="right-image-box" >
+					<view class="right-image-box">
 						<navigator class="right-image-item" v-for="(item2,i2) in item.product_list" :key="i2"
 							v-if="i2 !== 0" :url="item2.url">
 							<image :src="item2.image_src" :style="{width:item2.image_width + 'rpx'}" mode="widthFix">
@@ -82,10 +85,17 @@
 				//对数据进行处理
 				res.message.forEach(floor => {
 					floor.product_list.forEach(value => {
-						value.url = "/subpackage/goods_list/goods_list?" + value.navigator_url.split('?')[1]
+						value.url = "/subpackage/goods_list/goods_list?" + value.navigator_url.split(
+							'?')[1]
 					})
 				})
 				this.floorList = res.message
+			},
+			//跳转到搜索页面
+			gotoSearch() {
+				uni.navigateTo({
+					url: '/subpackage/search/search'
+				})
 			}
 		},
 		onLoad() {
@@ -136,5 +146,11 @@
 			flex-wrap: wrap;
 			justify-content: space-around;
 		}
+	}
+
+	.search-box {
+		position: sticky;
+		top: 0;
+		z-index: 999;
 	}
 </style>

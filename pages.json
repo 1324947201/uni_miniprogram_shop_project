@@ -2,7 +2,7 @@
 	"pages": [{
 		"path": "pages/home/home",
 		"style": {
-			"enablePullDownRefresh": true
+			"enablePullDownRefresh": false
 		}
 
 	}, {
@@ -70,6 +70,12 @@
 		}, {
 			"path": "goods_list/goods_list",
 			"style": {}
+		}, {
+			"path": "search/search",
+			"style": {
+				"navigationBarTitleText": "搜索",
+				"enablePullDownRefresh": false
+			}
 		}]
 	}]
 }

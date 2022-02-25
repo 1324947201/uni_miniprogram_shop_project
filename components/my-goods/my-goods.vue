@@ -9,7 +9,7 @@
 			<view class="goods-item-right">
 				<view class="goods-name">{{goods.goods_name}}</view>
 				<view class="goods-info">
-					<view class="goods-price">￥{{goods.goods_price | tofixed}}</view>
+					<view class="goods-price">¥{{goods.goods_price | tofixed}}</view>
 				</view>
 			</view>
 		</view>

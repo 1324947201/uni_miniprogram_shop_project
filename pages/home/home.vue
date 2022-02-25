@@ -60,7 +60,7 @@
 				if (res.meta.status !== 200) return uni.$showMsg() //调用自定义方法
 				this.swiperList = res.message
 			},
-			//虎丘导航栏数据
+			//获取导航栏数据
 			async getNavList() {
 				const {
 					data: res

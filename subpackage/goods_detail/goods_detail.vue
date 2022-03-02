@@ -27,12 +27,19 @@
 		<rich-text :nodes="goods_info.goods_introduce"></rich-text>
 		<!-- 商品操作 -->
 		<view class="goods-nav">
-			<uni-goods-nav :fill="true" :options="options" :buttonGroup="buttonGroup" @click="onClick"/>
+			<uni-goods-nav :fill="true" :options="options" :buttonGroup="buttonGroup" @click="onClick"
+				@buttonClick="buttonClick" />
 		</view>
 	</view>
 </template>
 
 <script>
+	import {
+		mapState,
+		mapMutations,
+		mapGetters
+	} from 'vuex'
+
 	export default {
 		data() {
 			return {
@@ -43,8 +50,8 @@
 				}, {
 					icon: 'cart',
 					text: '购物车',
-					info: 2,
-					infoBackgroundColor: '#c00000',
+					info: 0,
+					infoBackgroundColor: '#fa5151',
 					infoColor: "#fff"
 				}],
 				buttonGroup: [{
@@ -54,13 +61,14 @@
 					},
 					{
 						text: '立即购买',
-						backgroundColor: '#6c4ea7',
+						backgroundColor: '#92006f',
 						color: '#fff'
 					}
 				]
 			}
 		},
 		methods: {
+			...mapMutations('store_cart', ['addToCart']),
 			//获取商品详情信息
 			async getGoodsDetail(id) {
 				const {
@@ -78,13 +86,43 @@
 					urls: this.goods_info.pics.map(x => x.pics_big)
 				})
 			},
-			onClick(e){
-				if(e.content.text === "购物车"){
+			onClick(e) {
+				if (e.content.text === "购物车") {
 					uni.switchTab({
-						url:"/pages/cart/cart"
+						url: "/pages/cart/cart"
 					})
 				}
+			},
+			buttonClick(e) {
+				if (e.content.text === "加入购物车") {
+					//组织商品的信息对象
+					const goods = {
+						goods_id: this.goods_info.goods_id,
+						goods_name: this.goods_info.goods_name,
+						goods_price: this.goods_info.goods_price,
+						goods_count: 1,
+						goods_small_logo: this.goods_info.goods_small_logo,
+						goods_state: true
+					}
+					this.addToCart(goods)
+					uni.$showMsg('添加成功')
+				}
 			}
+		},
+		computed: {
+			...mapState('store_cart', ['cart']),
+			...mapGetters('store_cart', ['total'])
+		},
+		watch: {
+			total: {
+				immediate: true,
+				handler(newValue) {
+					const result = this.options.find(item => item.text === "购物车")
+					if (result) {
+						result.info = newValue
+					}
+				}
+			},
 		},
 		onLoad(options) {
 			this.getGoodsDetail(options.goods_id)
@@ -149,7 +187,7 @@
 			color: gray;
 		}
 	}
-	
+
 	.goods-nav {
 		position: fixed;
 		bottom: 0;

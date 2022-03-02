@@ -1,7 +1,7 @@
 <template>
 	<view>
-		<view class="goods_list">
-			<view v-for="(goods , i) in goodsList" :key='i' @click="gotoDetail(goods)">
+		<view class="goods-list">
+			<view v-for="(goods , i) in goodsList" :key='i'>
 				<my-goods :goods="goods"></my-goods>
 			</view>
 		</view>
@@ -38,12 +38,12 @@
 				this.goodsList = [...this.goodsList, ...res.message.goods]
 				this.total = res.message.total
 			},
-			//导航到商品详情页
-			gotoDetail(goods){
-				uni.navigateTo({
-					url:"/subpackage/goods_detail/goods_detail?goods_id=" + goods.goods_id
-				})
-			}
+			//导航到商品详情页(已经移入my-goods组件中)
+			// gotoDetail(goods){
+			// 	uni.navigateTo({
+			// 		url:"/subpackage/goods_detail/goods_detail?goods_id=" + goods.goods_id
+			// 	})
+			// }
 		},
 		onLoad(options) {
 			this.queryObj.query = options.query || ''
@@ -68,8 +68,11 @@
 </script>
 
 <style lang="scss">
-	.goods_list {
-		padding: 0 5px;
+	page {
 		background-color: #f0f0f0;
+		
+		.goods-list {
+			padding: 0 5px;
+		}
 	}
 </style>

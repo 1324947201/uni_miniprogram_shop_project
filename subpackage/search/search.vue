@@ -1,7 +1,7 @@
 <template>
 	<view>
 		<view class="search-container">
-			<uni-search-bar @input="input" :radius="100" cancelButton="none" clearButton="auto">
+			<uni-search-bar @confirm="confirm" @clear="clearList" :radius="100" cancelButton="none" clearButton="auto" >
 			</uni-search-bar>
 		</view>
 		<!-- 搜索建议列表 -->
@@ -39,17 +39,13 @@
 			};
 		},
 		methods: {
-			//input输入事件处理函数
-			input(e) {
-				clearTimeout(this.timer)
-				this.timer = setTimeout(() => {
-					this.keywords = e
+			//confirm搜索事件处理函数
+			confirm(e) {
+					this.keywords = e.value
 					this.getSearchList()
 					if (this.keywords) {
-						//保存搜索历史记录
-						this.saveSearchHistory(e)
+						this.saveSearchHistory()
 					}
-				}, 500)
 			},
 			//获取搜索建议列表
 			async getSearchList() {
@@ -90,6 +86,11 @@
 				uni.navigateTo({
 					url:'/subpackage/goods_list/goods_list?query=' + item
 				})
+			},
+			//点击clear搜索框
+			clearList(){
+				this.keywords = ''
+				this.searchResult = []
 			}
 		},
 		computed: {

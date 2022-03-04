@@ -45,9 +45,6 @@
 			return {
 				goods_info: {},
 				options: [{
-					icon: 'shop',
-					text: '店铺',
-				}, {
 					icon: 'cart',
 					text: '购物车',
 					info: 0,
@@ -132,7 +129,7 @@
 
 <style lang="scss">
 	.backGround {
-		background-color: #f6f7f8;
+		background-color: var(--gray);
 		padding-bottom: 50px;
 	}
 

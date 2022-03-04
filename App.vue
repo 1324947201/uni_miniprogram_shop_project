@@ -25,6 +25,7 @@
 		font-family: -apple-system, BlinkMacSystemFont, Helvetica Neue, Helvetica, Arial, PingFang SC, Hiragino Sans GB, Microsoft YaHei, sans-serif;
 		--main-color: #6c4ea7;
 		--main-color-light: #92006f;
+		--gray: #f4f4f4
 	}
 
 	/* #endif */

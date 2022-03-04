@@ -14,6 +14,13 @@ $http.beforeRequest = function(option) { //请求拦截器
 	uni.showLoading({ //展示loading效果
 		title: '加载中'
 	})
+	//判断当前接口是否有权限
+	if(option.url.indexOf('/my/') !== -1){
+		//若有权限，则添加Authorization字段为服务器返回的token
+		option.header = {
+			Authorization: store.state.store_user.token
+		}
+	}
 }
 
 $http.afterRequest = function(option) { //响应拦截器

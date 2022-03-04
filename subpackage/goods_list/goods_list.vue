@@ -69,7 +69,7 @@
 
 <style lang="scss">
 	page {
-		background-color: #f0f0f0;
+		background-color: var(--gray);
 		
 		.goods-list {
 			padding: 0 5px;

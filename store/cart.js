@@ -21,7 +21,7 @@ export default {
 				result.goods_count++
 			}
 			//持久化保存本地
-			this.commit('store_cart/saveToStorage', state.cart)
+			this.commit('store_cart/saveToStorage')
 		},
 		//将购物车信息保存到服务器（由于没有服务器，这里用保存本地替代）
 		saveToStorage(state) {
@@ -32,7 +32,7 @@ export default {
 			const result = state.cart.find(item => item.goods_id === goods.goods_id)
 			if (result) {
 				result.goods_state = goods.goods_state
-				this.commit('store_cart/saveToStorage', state.cart)
+				this.commit('store_cart/saveToStorage')
 			}
 		},
 		//修改全选/全不选状态
@@ -40,22 +40,27 @@ export default {
 			state.cart.forEach((item) => {
 				item.goods_state = allState
 			})
-			this.commit('store_cart/saveToStorage', state.cart)
+			this.commit('store_cart/saveToStorage')
 		},
 		//修改商品数量
 		updataGoodsCount(state, goods) {
 			const result = state.cart.find(item => item.goods_id === goods.goods_id)
 			if (result) {
 				result.goods_count = goods.goods_count
-				this.commit('store_cart/saveToStorage', state.cart)
+				this.commit('store_cart/saveToStorage')
 			}
 		},
 		//移除商品
 		removeGoodsById(state, goodsIdArr) {
 			state.cart = state.cart.filter(item => goodsIdArr.indexOf(item.goods_id) === -1)
 			uni.$showMsg("移除成功")
-			this.commit('store_cart/saveToStorage', state.cart)
+			this.commit('store_cart/saveToStorage')
 		},
+		//清空全部商品
+		removeAllGoods(state){
+			state.cart = []
+			this.commit('store_cart/saveToStorage')
+		}
 	},
 
 

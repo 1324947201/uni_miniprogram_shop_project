@@ -90,14 +90,14 @@
 
 <style lang="scss">
 	page {
-		background-color: #f0f0f0;
+		background-color: var(--gray);
 	}
 
 	.sticky {
 		position: sticky;
 		top: 0;
 		padding-top: 1px;
-		box-shadow: 0 0 0 #ccc, 0 0 0 #ccc, 0 0 0 #ccc, 0 0 8px #e3e5e7;
+		box-shadow: 0 0 8px #d2d2d2;
 		background-color: #fff;
 		z-index: 999;
 	}

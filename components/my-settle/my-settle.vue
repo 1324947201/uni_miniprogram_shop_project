@@ -115,7 +115,6 @@
 
 				//5.调用微信API发起支付
 				const [err, succ] = await uni.requestPayment(this.pay)
-				if (err && err.errMsg !== 'requestPayment:fail no permission') return uni.$showMsg('订单未支付 #103')
 
 				uni.showModal({
 					title: '假装是支付弹窗',

@@ -8,7 +8,8 @@ import {
 	$http
 } from '@escook/request-miniprogram'
 uni.$http = $http
-$http.baseUrl = "https://api-hmugo-web.itheima.net" //请求根路径
+$http.baseUrl = "https://www.uinav.com" //请求根路径、
+// $http.baseUrl = "https://api-hmugo-web.itheima.net" //请求根路径(接口证书过期，看看会不会换证书）
 
 $http.beforeRequest = function(option) { //请求拦截器
 	uni.showLoading({ //展示loading效果
